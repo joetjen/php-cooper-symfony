@@ -24,7 +24,7 @@ jobs:
           - { php: "8.3", symfony: "7.4.*" }
           - { php: "8.4", symfony: "8.*" }
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
