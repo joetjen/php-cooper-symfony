@@ -1,0 +1,9 @@
+parameters:
+    level: 8
+    paths:
+        - src
+        # PHPStan analyses a trait only where a class uses it, and the one
+        # class using CooperKernelTrait is the test kernel -- an
+        # application's kernel, written as README.md says to write it.
+        - tests/Support/TestKernel.php
+    tmpDir: .phpstan.cache

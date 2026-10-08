@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { php: "8.2", symfony: "6.4.*" }
+          - { php: "8.3", symfony: "7.4.*" }
+          - { php: "8.4", symfony: "8.*" }
+    steps:
+      - uses: actions/checkout@v4
+
+      # joetjen/cooper and joetjen/cooper-config are unpublished;
+      # composer.json finds them through path repositories at
+      # ../php-cooper and ../php-cooper-config.
+      - name: Check out php-cooper and php-cooper-config beside this package
+        run: |
+          git clone --depth 1 https://github.com/joetjen/php-cooper.git ../php-cooper
+          git clone --depth 1 https://github.com/joetjen/php-cooper-config.git ../php-cooper-config
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, bcmath
+          coverage: none
+
+      - name: Validate composer.json
+        run: composer validate --strict
+
+      # Updated rather than installed from the lock: the lock pins one
+      # Symfony major, and each matrix entry tests another.
+      - name: Install dependencies
+        run: |
+          composer require --no-update \
+            "symfony/config:${{ matrix.symfony }}" \
+            "symfony/console:${{ matrix.symfony }}" \
+            "symfony/dependency-injection:${{ matrix.symfony }}" \
+            "symfony/framework-bundle:${{ matrix.symfony }}" \
+            "symfony/http-kernel:${{ matrix.symfony }}" \
+            "symfony/runtime:${{ matrix.symfony }}" \
+            "symfony/yaml:${{ matrix.symfony }}"
+          composer update --prefer-dist --no-progress
+
+      - name: Static analysis
+        run: composer run analyse
+
+      - name: Test
+        run: composer test
