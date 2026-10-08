@@ -1,7 +1,7 @@
 # php-cooper-symfony
 
-The Symfony integration of [Cooper](../php-cooper). A
-[CASC](../php-cooper/casc/CASC.md) document replaces Symfony's
+The Symfony integration of [Cooper](https://github.com/joetjen/php-cooper). A
+[CASC](https://github.com/joetjen/php-cooper/blob/main/casc/CASC.md) document replaces Symfony's
 `config/packages/*.yaml` for **bundle configuration** and **container
 parameters**. Cooper reads the `.env` files.
 
@@ -58,10 +58,7 @@ a standard Symfony 6.4, 7.x or 8.x application built on
 composer require joetjen/cooper-symfony
 ```
 
-`joetjen/cooper` and `joetjen/cooper-config` come with it. Until they
-are published, all three live side by side and are found through
-Composer `path` repositories (`../php-cooper`, `../php-cooper-config`,
-`../php-cooper-symfony`) in your application's `composer.json`.
+`joetjen/cooper` and `joetjen/cooper-config` come with it.
 
 ### 2. Register the bundle
 
