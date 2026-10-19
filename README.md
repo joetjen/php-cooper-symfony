@@ -32,7 +32,7 @@ becomes Symfony's `%env(APP_SECRET)%` placeholder, which is read when
 the container is used. No value from the build machine's environment
 is ever written into `var/cache`.
 
-**Status: 0.1.0, pre-release.** See [CHANGELOG.md](CHANGELOG.md).
+**Status: 0.2.0, pre-release.** See [CHANGELOG.md](CHANGELOG.md).
 
 ## Contents
 
