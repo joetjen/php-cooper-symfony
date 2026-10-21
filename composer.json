@@ -1,6 +1,6 @@
 {
   "name": "joetjen/cooper-symfony",
-  "description": "Symfony integration of Cooper: bundle configuration and container parameters from a CASC document, ${NAME} kept a runtime %env()% placeholder, .env files read by Cooper.",
+  "description": "Under heavy development: not for production use before 1.0.0. Symfony integration of Cooper: bundle configuration and container parameters from a CASC document, ${NAME} kept a runtime %env()% placeholder, .env files read by Cooper.",
   "keywords": ["casc", "cooper", "config", "configuration", "symfony", "bundle"],
   "type": "symfony-bundle",
   "homepage": "http://github.com/joetjen/php-cooper-symfony",
